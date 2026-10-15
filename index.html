@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>smte ks — Merch</title>
+<meta name="description" content="Official merch lookbook and contact information.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf6ef; --ink: #1d1a16; --muted: #6b645a; --card: #fff;
+    --accent: #d9667f; --line: #e6dfd2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14110e; --ink: #f4efe6; --muted: #a39b8d; --card: #1e1a16; --line: #2e2923; }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, sans-serif; }
+  h1, h2, h3, .logo { font-family: "Bricolage Grotesque", Inter, sans-serif; letter-spacing: -.02em; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  header { position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); z-index: 10; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; }
+  nav a { margin-left: 20px; text-decoration: none; color: var(--muted); font-weight: 500; }
+  nav a:hover { color: var(--ink); }
+
+  .logo img { height: 40px; width: auto; display: block; }
+  .hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+  .hero-logo { width: 100%; }
+  @media (max-width: 720px) { .hero { grid-template-columns: 1fr; } .hero-logo { max-width: 360px; } }
+  .hero h1 { font-size: clamp(2.6rem, 8vw, 5.5rem); line-height: 1; font-weight: 800; max-width: 12ch; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { margin-top: 20px; max-width: 46ch; color: var(--muted); font-size: 1.1rem; }
+  .btn { display: inline-block; margin-top: 28px; padding: 12px 22px; background: var(--ink); color: var(--bg); border-radius: 999px; text-decoration: none; font-weight: 500; }
+  .btn:hover { background: var(--accent); color: #fff; }
+
+  section { padding: 56px 0; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+  .item { cursor: pointer; text-align: left; font: inherit; color: inherit; padding: 0; transition: transform .15s, box-shadow .15s; }
+  .item:hover, .item:focus-visible { transform: translateY(-3px); box-shadow: 0 8px 24px rgb(0 0 0 / .12); outline: none; }
+  .item:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
+  .price { font-family: "Bricolage Grotesque", Inter, sans-serif; font-weight: 800; font-size: 1.1rem; margin-top: 10px; }
+  dialog { border: 1px solid var(--line); border: 0; border-radius: 0; padding: 0; margin: 0; background: var(--card); color: var(--ink); width: 100vw; height: 100vh; max-width: none; max-height: none; overflow: auto; }
+  dialog::backdrop { background: rgb(0 0 0 / .6); }
+  .modal { display: grid; grid-template-columns: 1.4fr 1fr; min-height: 100vh; }
+  .modal .mpic { background: #fff center/contain no-repeat; min-height: 100vh; margin: 0; display: grid; place-items: center; font-size: 6rem; }
+  .modal .mbody { padding: 72px 48px 48px; display: flex; flex-direction: column; gap: 14px; justify-content: center; max-width: 520px; }
+  .modal h3 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+  .modal .mprice { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .modal p { color: var(--muted); }
+  .modal .btn { margin-top: 16px; text-align: center; align-self: flex-start; }
+  .close { position: fixed; top: 16px; right: 16px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); font-size: 1.2rem; cursor: pointer; }
+  @media (max-width: 760px) { .modal { grid-template-columns: 1fr; min-height: 0; } .modal .mpic { min-height: 55vh; } .modal .mbody { padding: 28px 20px 40px; max-width: none; } }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .item .pic { aspect-ratio: 1; display: grid; place-items: center; font-size: 4.5rem; background-size: cover; background-position: center; }
+  .item.wide { grid-column: span 2; }
+  .item.wide .pic { aspect-ratio: 4/3; background-size: contain !important; background-repeat: no-repeat !important; background-color: #fff !important; }
+  @media (max-width: 560px) { .item.wide { grid-column: span 1; } }
+  .item .body { padding: 16px 18px 20px; }
+  .item h3 { font-size: 1.15rem; }
+  .item p { color: var(--muted); font-size: .92rem; margin-top: 4px; }
+  .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { font-size: .75rem; padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+  .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .info div { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .info h3 { font-size: 1.05rem; }
+  .info p { color: var(--muted); font-size: .95rem; margin-top: 4px; }
+
+  .group { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 880px; }
+  .group img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--line); display: block; }
+  .group figcaption { margin-top: 10px; color: var(--muted); font-size: .92rem; }
+
+  .designer { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 32px; align-items: center; }
+  .designer img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; border: 1px solid var(--line); }
+  .designer .role { color: var(--accent); font-weight: 500; font-size: .9rem; text-transform: uppercase; letter-spacing: .08em; }
+  .designer h3 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 4px 0 10px; }
+  .designer p { color: var(--muted); max-width: 46ch; }
+  @media (max-width: 640px) { .designer { grid-template-columns: 1fr; } }
+
+  .contact { background: var(--ink); color: var(--bg); border-radius: 24px; padding: 40px 28px; }
+  .contact h2 { margin-bottom: 8px; }
+  .contact > p { opacity: .75; margin-bottom: 24px; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .links a { padding: 10px 18px; border: 1px solid color-mix(in srgb, var(--bg) 35%, transparent); border-radius: 999px; text-decoration: none; }
+  .links a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .85rem; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="smte ks"><img src="images/logo.png" alt="smte ks"></a>
+    <nav><a href="#merch">Merch</a><a href="#group">About</a><a href="#info">Info</a><a href="#designer">Designer</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+    <h1>Wear the <em>vibe.</em></h1>
+    <p id="tagline">A look at our official merch. Browse the collection and get in touch to learn more.</p>
+    <a class="btn" href="#contact">Contact us</a>
+    </div>
+    <img class="hero-logo" src="images/logo.png" alt="smte ks logo">
+  </div>
+
+  <section id="merch"><div class="wrap">
+    <h2>The smte ks collection</h2>
+    <div class="grid" id="grid"></div>
+  </div></section>
+
+  <section id="group"><div class="wrap">
+    <h2>Who we are</h2>
+    <div class="group" id="groupPics"></div>
+  </div></section>
+
+  <section id="info"><div class="wrap">
+    <h2>Good to know</h2>
+    <div class="info" id="infoBlocks"></div>
+  </div></section>
+
+  <section id="designer"><div class="wrap">
+    <h2>The designer</h2>
+    <div class="designer">
+      <img id="dImg" alt="">
+      <div><div class="role" id="dRole"></div><h3 id="dName"></h3><p id="dBio"></p><a class="btn" id="dIg" target="_blank" rel="noopener">Instagram @napadon_kub</a></div>
+    </div>
+  </div></section>
+
+  <section id="contact"><div class="wrap">
+    <div class="contact">
+      <h2>Get in touch</h2>
+      <p id="contactNote">Questions about our merch? Message us on Instagram.</p>
+      <div class="links" id="links"></div>
+    </div>
+  </div></section>
+</main>
+
+<dialog id="dlg" aria-label="Product details">
+  <button class="close" id="dlgClose" aria-label="Close">✕</button>
+  <div class="modal">
+    <div class="mpic" id="mPic"></div>
+    <div class="mbody">
+      <h3 id="mName"></h3>
+      <div class="mprice" id="mPrice"></div>
+      <p id="mDesc"></p>
+      <div class="tags" id="mTags"></div>
+      <a class="btn" href="#contact" id="mBtn">Ask about this</a>
+    </div>
+  </div>
+</dialog>
+
+<footer><div class="wrap">© <span id="year"></span> <span data-brand>smte ks</span></div></footer>
+
+<script>
+/* ============ EDIT YOUR CONTENT HERE ============ */
+const SITE = {
+  brand: "smte ks",
+  price: 39,          // USD, applies to every item (set price: on a product to override)
+  currency: "$",
+  tagline: "A look at our official merch. Browse the collection and get in touch to learn more.",
+  contactNote: "Questions about our merch? Message us on Instagram.",
+  // Put photos in an "images" folder and set image: "images/tee.jpg". Leave "" to show the emoji.
+  group: [
+    { image: "images/group.jpg",  alt: "The smte ks group", caption: "" },
+    { image: "images/group2.jpg", alt: "The smte ks group", caption: "" }
+  ],
+  designer: { name: "August", role: "Designer", ig: "https://www.instagram.com/napadon_kub", image: "images/designer.jpg", bio: "Write a short line about the designer here." },
+  products: [
+    { name: "Jacket 1", emoji: "🧥", image: "images/jacket-1.png", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 2", emoji: "🧥", image: "images/jacket-2.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 3", emoji: "🧥", image: "images/jacket-3.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 4", emoji: "🧥", image: "images/jacket-4.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 5", emoji: "🧥", image: "images/jacket-5.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 6", emoji: "🧥", image: "images/jacket-6.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 7", emoji: "🧥", image: "images/jacket-7.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Jacket 8", emoji: "🧥", image: "images/jacket-8.jpg", color: "#eee", desc: "smte ks jacket.", tags: ["Jacket"] },
+    { name: "Navy Tee",  emoji: "👕", image: "images/tshirt-navy.jpg",  wide: true, desc: "Navy tee with the smte ks logo on the back and # on the chest.", tags: ["T-shirt", "Navy"] },
+    { name: "Black Tee", emoji: "👕", image: "images/tshirt-black.jpg", wide: true, desc: "Black tee with the pink smte ks logo on the back and # on the chest.", tags: ["T-shirt", "Black"] }
+  ],
+  info: [
+    { title: "Availability", text: "Items shown are examples of what we offer. Contact us for current stock." },
+    { title: "Where to find us", text: "Pop-ups, events, and by direct message." },
+    { title: "Custom orders", text: "Want something special? Ask us." }
+  ],
+  // type: link | mail | tel — change "href" to your real details
+  contacts: [
+    { label: "Instagram @5tub1smtefinverr", href: "https://www.instagram.com/5tub1smtefinverr/" }
+  ]
+};
+/* ================================================= */
+
+document.title = SITE.brand + " — Merch";
+document.querySelectorAll("[data-brand]").forEach(e => e.textContent = SITE.brand);
+document.getElementById("tagline").textContent = SITE.tagline;
+document.getElementById("contactNote").textContent = SITE.contactNote;
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; };
+
+SITE.group.forEach(g => {
+  const f = document.createElement("figure"), i = document.createElement("img");
+  i.src = g.image; i.alt = g.alt; f.append(i);
+  if (g.caption) { const c = document.createElement("figcaption"); c.textContent = g.caption; f.append(c); }
+  document.getElementById("groupPics").append(f);
+});
+
+const D = SITE.designer;
+document.getElementById("dImg").src = D.image; document.getElementById("dImg").alt = D.name;
+document.getElementById("dName").textContent = D.name;
+document.getElementById("dRole").textContent = D.role;
+document.getElementById("dBio").textContent = D.bio;
+document.getElementById("dIg").href = D.ig;
+
+const grid = document.getElementById("grid");
+SITE.products.forEach(p => {
+  const card = el("button", "item" + (p.wide ? " wide" : ""));
+  card.type = "button";
+  card.setAttribute("aria-label", p.name + " — details");
+  const pic = el("div", "pic");
+  pic.style.background = p.image ? `url(${p.image}) center/cover` : p.color;
+  if (!p.image) pic.textContent = p.emoji;
+  const body = el("div", "body");
+  body.append(el("h3", "", p.name), el("p", "", p.desc));
+  const tags = el("div", "tags");
+  (p.tags || []).forEach(t => tags.append(el("span", "", t)));
+  body.append(tags, el("div", "price", SITE.currency + (p.price ?? SITE.price)));
+  card.append(pic, body);
+  card.onclick = () => openItem(p);
+  grid.append(card);
+});
+
+const dlg = document.getElementById("dlg");
+function openItem(p) {
+  const pic = document.getElementById("mPic");
+  pic.style.backgroundImage = p.image ? `url(${p.image})` : "none";
+  pic.textContent = p.image ? "" : p.emoji;
+  document.getElementById("mName").textContent = p.name;
+  document.getElementById("mPrice").textContent = SITE.currency + (p.price ?? SITE.price);
+  document.getElementById("mDesc").textContent = p.desc;
+  const t = document.getElementById("mTags"); t.replaceChildren();
+  (p.tags || []).forEach(x => t.append(el("span", "", x)));
+  dlg.showModal();
+}
+document.getElementById("dlgClose").onclick = () => dlg.close();
+document.getElementById("mBtn").onclick = () => dlg.close();
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+const info = document.getElementById("infoBlocks");
+SITE.info.forEach(i => { const d = el("div"); d.append(el("h3", "", i.title), el("p", "", i.text)); info.append(d); });
+
+const links = document.getElementById("links");
+SITE.contacts.forEach(c => {
+  const a = el("a", "", c.label); a.href = c.href;
+  if (c.href.startsWith("http")) { a.target = "_blank"; a.rel = "noopener"; }
+  links.append(a);
+});
+</script>
+</body>
+</html>
