@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14110e">
 <title>smte ks — Merch</title>
 <meta name="description" content="Official merch lookbook and contact information.">
 <link rel="icon" href="images/logo.png">
@@ -10,14 +11,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf6ef; --ink: #1d1a16; --muted: #6b645a; --card: #fff;
-    --accent: #d9667f; --line: #e6dfd2;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #14110e; --ink: #f4efe6; --muted: #a39b8d; --card: #1e1a16; --line: #2e2923; }
+    color-scheme: dark;
+    --bg: #14110e; --ink: #f4efe6; --muted: #a39b8d; --card: #1e1a16;
+    --accent: #e8758f; --line: #2e2923;
   }
   * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; }
+  html, body { overflow-x: hidden; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+  a, button { -webkit-tap-highlight-color: transparent; }
   body { background: var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, sans-serif; }
   h1, h2, h3, .logo { font-family: "Bricolage Grotesque", Inter, sans-serif; letter-spacing: -.02em; }
   a { color: inherit; }
@@ -30,9 +31,9 @@
   nav a:hover { color: var(--ink); }
 
   .logo img { height: 40px; width: auto; display: block; }
-  .hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+  .hero { padding: 72px 16px 56px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: center; }
   .hero-logo { width: 100%; }
-  @media (max-width: 720px) { .hero { grid-template-columns: 1fr; } .hero-logo { max-width: 360px; } }
+  @media (max-width: 720px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero-logo { max-width: 360px; } }
   .hero h1 { font-size: clamp(2.6rem, 8vw, 5.5rem); line-height: 1; font-weight: 800; max-width: 12ch; }
   .hero h1 em { font-style: normal; color: var(--accent); }
   .hero p { margin-top: 20px; max-width: 46ch; color: var(--muted); font-size: 1.1rem; }
@@ -47,7 +48,7 @@
   .item:hover, .item:focus-visible { transform: translateY(-3px); box-shadow: 0 8px 24px rgb(0 0 0 / .12); outline: none; }
   .item:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
   .price { font-family: "Bricolage Grotesque", Inter, sans-serif; font-weight: 800; font-size: 1.1rem; margin-top: 10px; }
-  dialog { border: 1px solid var(--line); border: 0; border-radius: 0; padding: 0; margin: 0; background: var(--card); color: var(--ink); width: 100vw; height: 100vh; max-width: none; max-height: none; overflow: auto; }
+  dialog { border: 1px solid var(--line); border: 0; border-radius: 0; padding: 0; margin: 0; background: var(--card); color: var(--ink); width: 100vw; height: 100vh; height: 100dvh; max-width: none; overscroll-behavior: contain; max-height: none; overflow: auto; }
   dialog::backdrop { background: rgb(0 0 0 / .6); }
   .modal { display: grid; grid-template-columns: 1.4fr 1fr; min-height: 100vh; }
   .modal .mpic { background: #fff center/contain no-repeat; min-height: 100vh; margin: 0; display: grid; place-items: center; font-size: 6rem; }
@@ -56,14 +57,13 @@
   .modal .mprice { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); }
   .modal p { color: var(--muted); }
   .modal .btn { margin-top: 16px; text-align: center; align-self: flex-start; }
-  .close { position: fixed; top: 16px; right: 16px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); font-size: 1.2rem; cursor: pointer; }
-  @media (max-width: 760px) { .modal { grid-template-columns: 1fr; min-height: 0; } .modal .mpic { min-height: 55vh; } .modal .mbody { padding: 28px 20px 40px; max-width: none; } }
+  .close { touch-action: manipulation; position: fixed; top: 16px; right: 16px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); font-size: 1.2rem; cursor: pointer; }
+  @media (max-width: 760px) { .modal { grid-template-columns: 1fr; min-height: 0; } .modal .mpic { min-height: 55vh; min-height: 55dvh; } .modal .mbody { padding: 28px 20px 40px; max-width: none; } }
   .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
   .item .pic { aspect-ratio: 1; display: grid; place-items: center; font-size: 4.5rem; background-size: cover; background-position: center; }
   .item.wide { grid-column: span 2; }
   .item.wide .pic { aspect-ratio: 4/3; background-size: contain !important; background-repeat: no-repeat !important; background-color: #fff !important; }
-  @media (max-width: 560px) { .item.wide { grid-column: span 1; } }
-  .item .body { padding: 16px 18px 20px; }
+    .item .body { padding: 16px 18px 20px; }
   .item h3 { font-size: 1.15rem; }
   .item p { color: var(--muted); font-size: .92rem; margin-top: 4px; }
   .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -74,7 +74,7 @@
   .info h3 { font-size: 1.05rem; }
   .info p { color: var(--muted); font-size: .95rem; margin-top: 4px; }
 
-  .group { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 880px; }
+  .group { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px; max-width: 880px; }
   .group img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--line); display: block; }
   .group figcaption { margin-top: 10px; color: var(--muted); font-size: .92rem; }
 
@@ -93,6 +93,33 @@
   .links a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   footer { padding: 32px 0 48px; color: var(--muted); font-size: .85rem; text-align: center; }
+  /* phone */
+  @media (max-width: 560px) {
+    header .wrap { height: 54px; }
+    .logo img { height: 34px; }
+    nav { display: flex; gap: 4px; }
+    nav a { margin: 0; padding: 10px 8px; font-size: .9rem; }
+    .hero { padding: 36px 16px 24px; gap: 20px; }
+    .hero-logo { max-width: 260px; margin: 0 auto; order: -1; }
+    .hero p { font-size: 1rem; }
+    .btn { padding: 14px 24px; }
+    section { padding: 36px 0; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    nav a[href="#group"], nav a[href="#info"] { display: none; }
+    header .wrap { gap: 8px; }
+    .item.wide { grid-column: span 2; }
+    .item .pic { font-size: 3rem; }
+    .item .body { padding: 12px 12px 14px; }
+    .item h3 { font-size: 1rem; }
+    .item p { display: none; }
+    .tags span { font-size: .7rem; }
+    .contact { padding: 28px 20px; border-radius: 20px; }
+    .links a { width: 100%; text-align: center; padding: 14px 18px; }
+    .designer img { aspect-ratio: 1; }
+    .close { top: calc(12px + env(safe-area-inset-top)); right: 12px; }
+    .modal .mbody { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+    .modal .btn { align-self: stretch; }
+  }
 </style>
 </head>
 <body>
